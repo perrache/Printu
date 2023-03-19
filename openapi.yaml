@@ -1,0 +1,113 @@
+openapi: 3.1.0
+info:
+  title: Zadanie3
+  description: Zadanie rekrutacyjne firmy Printu
+  version: 1.0.0
+  license:
+    name: MIT License
+    identifier: MIT
+servers:
+  - url: https://api.example.com
+paths:
+  /v1/upload:
+    post:
+      summary: Add a JPG
+      operationId: createJPG
+      requestBody:
+        description: JPG to add
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JPGin'
+      responses:
+        '200':
+          description: A new added JPG
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JPGout'
+        '400':
+          errorCode:
+            type: integer
+          userMessage:
+            type: string
+          devMessage:
+            type: string
+          more:
+            type: string
+          applicationCode:
+            type: string
+components:
+  schemas:
+    JPGin:
+      type:
+        - object
+      properties:
+        part:
+          type:
+            - integer
+        etag:
+          type:
+            - string
+    JPGout:
+      type:
+        - object
+      properties:
+        id:
+          type:
+            - integer
+        timestamp:
+          type:
+            - integer
+        source:
+          type:
+            - string
+        folder:
+          type:
+            - null
+        height:
+          type:
+            - integer
+        width:
+          type:
+            - integer
+        mime:
+          type:
+            - string
+        display:
+          thumbnail:
+            width:
+              type: integer
+            height:
+              type: integer
+            src:
+              type: string
+          preview:
+            width:
+              type: integer
+            height:
+              type: integer
+            src:
+              type: string
+          square:
+            width:
+              type: integer
+            height:
+              type: integer
+            src:
+              type: string
+          original:
+            width:
+              type: integer
+            height:
+              type: integer
+            src:
+              type: string
+        metadata:
+          gps:
+            type: string
+          datetime:
+            type: integer
+          name:
+            type: string
